@@ -32,7 +32,6 @@
             padding: 20px;
         }
 
-        /* Copos de neve / Corações caindo */
         .heart-particle {
             position: absolute;
             color: var(--primary);
@@ -90,7 +89,6 @@
             margin-bottom: 30px;
         }
 
-        /* Contador */
         .timer-container {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -160,8 +158,8 @@
         <h1>Feliz Aniversário de Namoro! ❤️</h1>
         <p class="subtitle">O melhor capítulo da minha vida</p>
 
-        <!-- FOTO DE VOCÊS ADICIONADA AQUI -->
-        <img src="https://imgur.com/a/nZlqyZs" alt="Nossa Foto" style="width: 100%; max-height: 250px; object-fit: cover; border-radius: 16px; margin-bottom: 15px; border: 2px solid rgba(255,255,255,0.2);">
+        <!-- FOTO DO IMGUR CORRIGIDA -->
+        <img src="https://imgur.com" alt="Nossa Foto" style="width: 100%; max-height: 280px; object-fit: cover; border-radius: 16px; margin-bottom: 20px; border: 2px solid rgba(255,255,255,0.2);">
 
         <!-- CONTADOR DE TEMPO -->
         <div class="timer-container">
@@ -191,12 +189,12 @@
     </div>
 
     <script>
-        // CONFIGURAÇÃO: Coloque aqui a data exata em que começaram a namorar (Ano, Mês-1, Dia, Hora, Minuto)
-        // Atenção: No JavaScript, os meses começam em 0 (Janeiro = 0, Fevereiro = 1, etc.)
-        const dataInicio = new Date(2026, 8, 11, 10, 30, 0); // Exemplo: 11 de agosto 10:30
+        // CONFIGURAÇÃO DA DATA DE NAMORO (Ano, Mês-1, Dia, Hora, Minuto)
+        // Exemplo configurado: 11 de junho de 2026 às 10:30
+        const dataInicio = new Date(2026, 8, 11, 10, 30, 0); 
 
         function atualizarContador() {
-            const agora = new Date(2026, 8, 11, 10, 30, 0);
+            const agora = new Date();
             const diferenca = agora - dataInicio;
 
             const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
@@ -210,11 +208,9 @@
             document.getElementById('seconds').innerText = String(segundos).padStart(2, '0');
         }
 
-        // Atualiza o contador a cada 1 segundo
         setInterval(atualizarContador, 1000);
         atualizarContador();
 
-        // Efeito de corações caindo continuamente
         function criarCoracao() {
             const heart = document.createElement('div');
             heart.classList.add('heart-particle');
@@ -232,10 +228,8 @@
 
         setInterval(criarCoracao, 300);
 
-        // Ação do botão surpresa
         function mostrarSurpresa() {
             alert("Você é a pessoa mais incrível desse mundo! 🌟 Que o nosso 'para sempre' continue se renovando todos os dias.");
-            // Dica: Você pode trocar esse alert por uma chuva intensa de corações ou redirecionar para um vídeo de vocês!
             for(let i=0; i<30; i++) {
                 setTimeout(criarCoracao, i * 50);
             }
