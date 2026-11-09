@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz Aniversário de Namoro! ❤️</title>
+    <style>
+        :root {
+            --primary: #ff4b72;
+            --secondary: #6c5ce7;
+            --bg-gradient: linear-gradient(135deg, #1a0933 0%, #3b114d 50%, #1a0933 100%);
+            --accent: #ffd700;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+            position: relative;
+            padding: 20px;
+        }
+
+        /* Copos de neve / Corações caindo */
+        .heart-particle {
+            position: absolute;
+            color: var(--primary);
+            font-size: 1.5rem;
+            pointer-events: none;
+            animation: fall linear forwards;
+            z-index: 1;
+            opacity: 0.7;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-10vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(110vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 40px 30px;
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 
+                        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            z-index: 10;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            background: linear-gradient(to right, #ff7675, #fd79a8, #6c5ce7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+            font-weight: 800;
+        }
+
+        .subtitle {
+            color: #b2bec3;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+        }
+
+        /* Contador */
+        .timer-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin: 25px 0;
+        }
+
+        .timer-box {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 12px;
+            border-radius: 16px;
+            border-bottom: 3px solid var(--primary);
+            transition: transform 0.3s;
+        }
+
+        .timer-box:hover {
+            transform: scale(1.05);
+        }
+
+        .timer-num {
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: var(--accent);
+            display: block;
+        }
+
+        .timer-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: #dfe6e9;
+            letter-spacing: 1px;
+        }
+
+        p.message {
+            line-height: 1.6;
+            color: #f5f6fa;
+            font-size: 1.1rem;
+            margin: 25px 0;
+        }
+
+        .btn-surprise {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(255, 75, 114, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .btn-surprise:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 75, 114, 0.6);
+        }
+
+        .btn-surprise:active {
+            transform: translateY(1px);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1>Feliz Aniversário de Namoro! ❤️</h1>
+        <p class="subtitle">O melhor capítulo da minha vida</p>
+
+        <!-- CONTADOR DE TEMPO -->
+        <div class="timer-container">
+            <div class="timer-box">
+                <span class="timer-num" id="days">00</span>
+                <span class="timer-label">Dias</span>
+            </div>
+            <div class="timer-box">
+                <span class="timer-num" id="hours">00</span>
+                <span class="timer-label">Horas</span>
+            </div>
+            <div class="timer-box">
+                <span class="timer-num" id="minutes">00</span>
+                <span class="timer-label">Min</span>
+            </div>
+            <div class="timer-box">
+                <span class="timer-num" id="seconds">00</span>
+                <span class="timer-label">Seg</span>
+            </div>
+        </div>
+
+        <p class="message">
+            "Cada segundo ao seu lado me mostra que escolher você foi a melhor decisão que já tomei. Obrigado por ser minha parceira, meu amor e meu porto seguro. Te amo hoje, amanhã e sempre!"
+        </p>
+
+        <button class="btn-surprise" onclick="mostrarSurpresa()">Clique para mais amor</button>
+    </div>
+
+    <script>
+        // CONFIGURAÇÃO: Coloque aqui a data exata em que começaram a namorar (Ano, Mês-1, Dia, Hora, Minuto)
+        // Atenção: No JavaScript, os meses começam em 0 (Janeiro = 0, Fevereiro = 1, etc.)
+        const dataInicio = new Date(2022, 10, 8, 20, 0, 0); // Exemplo: 8 de Novembro de 2022 às 20:00
+
+        function atualizarContador() {
+            const agora = new Date();
+            const diferenca = agora - dataInicio;
+
+            const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
+            const horas = Math.floor((diferenca % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutos = Math.floor((diferenca % (1000 * 60 * 60)) / (1000 * 60));
+            const segundos = Math.floor((diferenca % (1000 * 60)) / 1000);
+
+            document.getElementById('days').innerText = String(dias).padStart(2, '0');
+            document.getElementById('hours').innerText = String(horas).padStart(2, '0');
+            document.getElementById('minutes').innerText = String(minutos).padStart(2, '0');
+            document.getElementById('seconds').innerText = String(segundos).padStart(2, '0');
+        }
+
+        // Atualiza o contador a cada 1 segundo
+        setInterval(atualizarContador, 1000);
+        atualizarContador();
+
+        // Efeito de corações caindo continuamente
+        function criarCoracao() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart-particle');
+            heart.innerHTML = ['❤️', '💖', '✨', '💕'][Math.floor(Math.random() * 4)];
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 2 + 's';
+            heart.style.fontSize = Math.random() * 1 + 1 + 'rem';
+            
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 5000);
+        }
+
+        setInterval(criarCoracao, 300);
+
+        // Ação do botão surpresa
+        function mostrarSurpresa() {
+            alert("Você é a pessoa mais incrível desse mundo! 🌟 Que o nosso 'para sempre' continue se renovando todos os dias.");
+            // Dica: Você pode trocar esse alert por uma chuva intensa de corações ou redirecionar para um vídeo de vocês!
+            for(let i=0; i<30; i++) {
+                setTimeout(criarCoracao, i * 50);
+            }
+        }
+    </script>
+</body>
+</html>
