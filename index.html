@@ -89,6 +89,17 @@
             margin-bottom: 30px;
         }
 
+        #foto-casal {
+            width: 100%;
+            max-height: 320px;
+            object-fit: cover;
+            border-radius: 16px;
+            margin-bottom: 20px;
+            border: 2px solid rgba(255,255,255,0.2);
+            cursor: pointer;
+            transition: opacity 0.4s ease;
+        }
+
         .timer-container {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -158,8 +169,8 @@
         <h1>Feliz Aniversário de Namoro! ❤️</h1>
         <p class="subtitle">O melhor capítulo da minha vida</p>
 
-        <!-- IMAGEM INTERNA DO REPOSITÓRIO CONFIGURADA -->
-        <img src="IMG20261107174118.jpg" alt="Nossa Foto" style="width: 100%; max-height: 320px; object-fit: cover; border-radius: 16px; margin-bottom: 20px; border: 2px solid rgba(255,255,255,0.2);">
+        <!-- GALERIA DE 5 FOTOS -->
+        <img id="foto-casal" src="foto1.jpg" alt="Nossa Foto" onclick="proximaFoto()">
 
         <!-- CONTADOR DE TEMPO -->
         <div class="timer-container">
@@ -189,6 +200,25 @@
     </div>
 
     <script>
+        // CONFIGURAÇÃO DAS 5 FOTOS
+        const fotos = ["foto1.jpg", "foto2.jpg", "foto3.jpg", "foto4.jpg", "foto5.jpg"];
+        let indiceFoto = 0;
+
+        function proximaFoto() {
+            const imgElement = document.getElementById("foto-casal");
+            imgElement.style.opacity = 0;
+            
+            setTimeout(() => {
+                indiceFoto = (indiceFoto + 1) % fotos.length;
+                imgElement.src = fotos[indiceFoto];
+                imgElement.style.opacity = 1;
+            }, 200);
+        }
+
+        // Troca a foto automaticamente a cada 4 segundos
+        setInterval(proximaFoto, 4000);
+
+        // CONTADOR DE TEMPO (11 de Julho de 2026 às 10:30)
         const dataInicio = new Date(2026, 6, 11, 10, 30, 0); 
 
         function atualizarContador() {
@@ -209,6 +239,7 @@
         setInterval(atualizarContador, 1000);
         atualizarContador();
 
+        // CHUVA DE CORAÇÕES
         function criarCoracao() {
             const heart = document.createElement('div');
             heart.classList.add('heart-particle');
@@ -226,7 +257,9 @@
 
         setInterval(criarCoracao, 300);
 
+        // BOTÃO DE SURPRESA
         function mostrarSurpresa() {
+            proximaFoto();
             alert("Você é a pessoa mais incrível desse mundo! 🌟 Que o nosso 'para sempre' continue se renovando todos os dias.");
             for(let i=0; i<30; i++) {
                 setTimeout(criarCoracao, i * 50);
